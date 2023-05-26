@@ -14,7 +14,7 @@ router.post(
     NoteController.createNote
 );
 
-router.post(
+router.get(
     '/get/:id',
     param('id').isString(),
     validator,

@@ -5,9 +5,6 @@ import LogService from '../../services/log.service';
 
 const logService: LogService = new LogService();
 const errorMiddleware = async (err: Error | ApiError, req: Request, res: Response, next: NextFunction): Promise<any> => {
-    console.error(err.message);
-
-
     if (err instanceof ApiError) {
         await logService.addLog(err.message, 'error', err.data);
 

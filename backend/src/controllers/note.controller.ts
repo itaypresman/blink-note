@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import NoteService from '../services/note.service';
+import { INote } from '../utils/mongo/Note';
+import ApiError from '../middlewares/ErrorMiddleware/ApiError';
 
 
 const noteService: NoteService = new NoteService();
@@ -20,9 +22,18 @@ export const createNote = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-export const getNote = async (req: Request, res: Response, next: NextFunction) => {
+export const getNote = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+        const id: string = req.params.id;
+        const now: Date = new Date();
+        const note: INote | null = await noteService.getNote(id);
 
+        if (!note || (now > note.validTo)) {
+            return next(ApiError.notFound());
+        }
+
+        await noteService.deleteNote(id);
+        res.json({ error: false, data: note });
     } catch (e) {
         next(e);
     }
