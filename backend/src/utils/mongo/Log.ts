@@ -1,10 +1,10 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 
-interface ILog extends Document {
-    id: string;
-    text: string;
-    validTo: Date;
+export interface ILog extends Document {
+    type: string;
+    message: string;
+    data: object[];
 }
 
 const NoteSchema: Schema = new Schema({

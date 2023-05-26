@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import NoteRouter from './routes/note.routes';
 import * as Config from './config';
 import ErrorMiddleware from './middlewares/ErrorMiddleware';
+import LoggerMiddleware from './middlewares/logger.middleware';
 import { mongoConnect } from './utils/mongo';
 
 
@@ -12,6 +13,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(LoggerMiddleware);
 app.use('/note', NoteRouter);
 app.get('/', (req, res) => res.send('Hello World'));
 app.use(ErrorMiddleware);

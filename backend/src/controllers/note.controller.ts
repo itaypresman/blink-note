@@ -3,9 +3,18 @@ import NoteService from '../services/note.service';
 
 
 const noteService: NoteService = new NoteService();
-export const createNote = async (req: Request, res: Response, next: NextFunction) => {
-    try {
 
+interface createNoteBody {
+    text: string,
+    validFor: string | undefined,
+}
+
+export const createNote = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const { text, validFor }: createNoteBody = req.body;
+        await noteService.createNote(text, validFor);
+
+        res.json({ error: false });
     } catch (e) {
         next(e);
     }
