@@ -15,6 +15,13 @@ router.post(
 );
 
 router.get(
+    '/exists/:id',
+    param('id').isString(),
+    validator,
+    NoteController.isExisted
+);
+
+router.get(
     '/get/:id',
     param('id').isString(),
     validator,

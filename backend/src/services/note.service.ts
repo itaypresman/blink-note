@@ -44,11 +44,17 @@ export default class NoteService {
         return end;
     }
 
-    async getNote(id: string): Promise<INote | null> {
+    getNote(id: string): Promise<INote | null> {
         return this.Note.findOne({ id }, { _id: 0, __v: 0 });
     }
 
     deleteNote(id: string): Promise<any> {
         return this.Note.deleteOne({ id });
+    }
+
+    async isExist(id: string): Promise<boolean> {
+        const now: Date = new Date();
+
+        return !!(await this.Note.exists({ id, validTo: { $gte: now } }));
     }
 };
