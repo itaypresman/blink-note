@@ -9,7 +9,7 @@ const router: Router = Router();
 router.post(
     '/create',
     body('text').isString(),
-    body('validFor').optional().custom((val: string) => /^\d+[mhdwM]$/.test(val)),
+    body('validFor').optional().custom((val: string) => /^\d+[hdwm]$/.test(val)),
     validator,
     NoteController.createNote
 );

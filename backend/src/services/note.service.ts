@@ -24,9 +24,6 @@ export default class NoteService {
         const end: Date = new Date();
 
         switch (type) {
-            case 'm':
-                end.setMinutes(end.getMinutes() + num);
-                break;
             case 'h':
                 end.setHours(end.getHours() + num);
                 break;
@@ -36,7 +33,7 @@ export default class NoteService {
             case 'w':
                 end.setDate(end.getDate() + (num * 7));
                 break;
-            case 'M':
+            case 'm':
                 end.setMonth(end.getMonth() + num);
                 break;
         }

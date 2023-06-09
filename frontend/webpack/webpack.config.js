@@ -29,12 +29,13 @@ const base_conf = {
                 },
             },
             {
-                test: /\.css$/,
+                test: /\.less$/,
                 use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' },
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
                 ]
-            },
+            }
         ],
     },
 
@@ -42,16 +43,16 @@ const base_conf = {
         extensions: ['.js', '.jsx'],
         alias: {
             '@utils': path.resolve(__dirname, '..', 'src', 'utils'),
-            '@components': path.resolve(__dirname, '..', 'src', 'components'),
-            '@stores': path.resolve(__dirname, '..', 'src', 'stores'),
-            '@public': path.resolve(__dirname, '..', 'public'),
+            '@components': path.resolve(__dirname, '..', 'src', 'components', 'shared'),
+            '@pages': path.resolve(__dirname, '..', 'src', 'components', 'pages'),
+            '@public': path.resolve(__dirname, '..', 'src', 'public'),
         },
     },
 
     plugins: [
         new HtmlWebPackPlugin({
-            template: './public/index.html',
-            favicon: './public/favicon.ico',
+            template: './src/public/index.html',
+            favicon: './src/public/favicon.ico',
             inject: false,
         }),
         new Dotenv({
