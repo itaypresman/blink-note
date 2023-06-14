@@ -1,9 +1,9 @@
-import LogService from '../services/log.service';
+// import LogService from '../services/log.service';
 import * as Helper from '../utils/Helper';
 import { NextFunction, Request } from 'express';
 
 
-const logService: LogService = new LogService();
+// const logService: LogService = new LogService();
 
 export default async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { headers, params, query, originalUrl, method } = req;
