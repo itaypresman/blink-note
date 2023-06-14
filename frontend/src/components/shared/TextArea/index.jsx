@@ -2,8 +2,13 @@ import React from 'react';
 import './TextArea.less';
 
 
-export default ({ rows = 12 }) => {
+export default ({ value, onChange, rows = 12 }) => {
     return (
-        <textarea className={'textarea'} rows={rows} placeholder={'Type your note...'}></textarea>
+        <textarea
+            value={value}
+            onChange={onChange}
+            className={'textarea'}
+            rows={rows} placeholder={'Type your note...'}
+        />
     );
 }

@@ -14,9 +14,9 @@ interface createNoteBody {
 export const createNote = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { text, validFor }: createNoteBody = req.body;
-        await noteService.createNote(text, validFor);
+        const note: INote = await noteService.createNote(text, validFor);
 
-        res.json({ error: false });
+        res.json({ error: false, id: note.id });
     } catch (e) {
         next(e);
     }

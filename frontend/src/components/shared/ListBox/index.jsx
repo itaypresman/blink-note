@@ -3,11 +3,11 @@ import './ListBox.less';
 import Option from "@components/ListBox/Option";
 
 
-export default ({ items = [] }) => {
+export default ({ value, onChange, items = [] }) => {
     const options = items.map(item => <Option key={item.value} value={item.value} label={item.label}/>);
 
     return (
-        <select className={'list-box'}>
+        <select value={value ?? ''} onChange={onChange} className={'list-box'}>
             {options}
         </select>
     );

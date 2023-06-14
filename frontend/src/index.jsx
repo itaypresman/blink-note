@@ -13,6 +13,7 @@ root.render(
             <Router>
                 <Routes>
                     <Route path={'/'} exact={true} element={<Main/>}/>
+                    <Route path={'/note/:id'} element={<Main/>}/>
                 </Routes>
             </Router>
         </Page>

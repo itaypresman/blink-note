@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import usePageTitle from "../../../hooks/usePageTitle";
 import TextArea from "@components/TextArea";
 import './main.less';
 import ListBox from "@components/ListBox";
 import Button from "@components/Button";
-import Label from "@components/Label";
 import CopyLink from "@components/CopyLink";
 import Disclaimer from "@components/Disclaimer";
+import noteApi from "@utils/noteApi";
+
 
 export default () => {
+    const [disabled, setDisabled] = useState(true);
+    const [note, setNote] = useState('');
+    const [validFor, setValidFor] = useState(null);
+    const [noteLink, setNoteLink] = useState('');
+
+    useEffect(() => {
+        if (note && validFor) {
+            setDisabled(!(note && validFor));
+        }
+    }, [note, validFor]);
+
     usePageTitle('Create Note');
-
-    const [disabled, setDisabled] = useState(false);
-
     const validForItems = [
         { label: 'Valid for', value: null },
         { label: '1 Hour', value: '1h' },
@@ -26,24 +35,42 @@ export default () => {
         { label: '6 Months', value: '6m' },
     ];
 
+    const onNoteChange = e => {
+        setNote(e.target.value);
+    };
+
+    const onValidForChange = e => {
+        setValidFor(e.target.value);
+    };
+
+    const onSendClick = () => {
+        noteApi
+            .post('/create', { text: note, validFor })
+            .then(res => {
+                setNoteLink(`${process.env.FRONT_URL}/note/${res.data.id}`);
+                setNote('');
+                setValidFor(null);
+            });
+    };
+
     return (
         <div className={'note-form'}>
             <div className={'form-group'}>
-                <TextArea/>
+                <TextArea value={note} onChange={onNoteChange}/>
             </div>
 
             <div className={'form-group --left'}>
                 <div className={'half --left'}>
-                    <Button text={'Create'} disabled={disabled}/>
+                    <Button onClick={onSendClick} text={'Create'} disabled={disabled}/>
                 </div>
 
                 <div className={'half --right'}>
-                    <ListBox items={validForItems}/>
+                    <ListBox onChange={onValidForChange} value={validFor} items={validForItems}/>
                 </div>
             </div>
 
-            <div className={'form-group'}>
-                <CopyLink text={'http://localhost:3000'}/>
+            <div className={`form-group ${noteLink ? null : '--hidden'}`}>
+                <CopyLink text={noteLink}/>
                 <div className={'disclaimer-container'}>
                     <Disclaimer>One click to select</Disclaimer>
                     <Disclaimer>Double click to copy</Disclaimer>
