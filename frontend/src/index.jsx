@@ -9,14 +9,12 @@ import Note from "@pages/Note";
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
-    <>
+    <Router>
         <Page>
-            <Router>
-                <Routes>
-                    <Route path={'/'} exact={true} element={<Main/>}/>
-                    <Route path={'/note/:id'} element={<Note/>}/>
-                </Routes>
-            </Router>
+            <Routes>
+                <Route path={'/'} exact={true} element={<Main/>}/>
+                <Route path={'/note/:id'} element={<Note/>}/>
+            </Routes>
         </Page>
-    </>
+    </Router>
 );

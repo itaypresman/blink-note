@@ -1,5 +1,4 @@
 import React from 'react';
-import './OpenNotePopup.less';
 import Button from "@components/Button";
 import {useNavigate} from "react-router";
 
