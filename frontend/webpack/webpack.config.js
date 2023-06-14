@@ -7,7 +7,7 @@ const devConf = require('./dev');
 
 
 const base_conf = {
-    mode: process.env.mode,
+    mode: process.env.mode || 'production',
     entry: ['babel-polyfill', path.resolve(__dirname, '../src/index.jsx')],
 
     output: {
@@ -62,6 +62,6 @@ const base_conf = {
     ],
 };
 
-module.exports = process.env.mode === 'production'
-    ? merge(base_conf, prodConf)
-    : merge(base_conf, devConf);
+module.exports = process.env.mode === 'development'
+    ? merge(base_conf, devConf)
+    : merge(base_conf, prodConf);
