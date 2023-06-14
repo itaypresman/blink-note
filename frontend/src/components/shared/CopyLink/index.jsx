@@ -5,7 +5,6 @@ import './CopyLink.less';
 export default ({ text }) => {
     const ref = useRef(null);
     const selectClick = () => {
-        console.log(ref)
         if (ref.current) {
             ref.current.select();
         }

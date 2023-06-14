@@ -12,7 +12,7 @@ import noteApi from "@utils/noteApi";
 export default () => {
     const [disabled, setDisabled] = useState(true);
     const [note, setNote] = useState('');
-    const [validFor, setValidFor] = useState(null);
+    const [validFor, setValidFor] = useState('');
     const [noteLink, setNoteLink] = useState('');
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default () => {
 
     usePageTitle('Create Note');
     const validForItems = [
-        { label: 'Valid for', value: null },
+        { label: 'Valid for', value: '' },
         { label: '1 Hour', value: '1h' },
         { label: '12 Hours', value: '12h' },
         { label: '1 Day', value: '1d' },
@@ -49,7 +49,7 @@ export default () => {
             .then(res => {
                 setNoteLink(`${process.env.FRONT_URL}/note/${res.data.id}`);
                 setNote('');
-                setValidFor(null);
+                setValidFor('');
             });
     };
 
