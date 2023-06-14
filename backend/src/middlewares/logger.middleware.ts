@@ -17,7 +17,7 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
     console.log('QUERY:', query);
     console.log('-------------------------');
 
-    await logService.addLog(`${method}: ${originalUrl}`, 'info', [{ params, query, ip, userAgent, device }]);
+    // await logService.addLog(`${method}: ${originalUrl}`, 'info', [{ params, query, ip, userAgent, device }]);
 
     next();
 };
