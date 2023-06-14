@@ -33,7 +33,7 @@ export const getNote = async (req: Request, res: Response, next: NextFunction): 
         }
 
         await noteService.deleteNote(id);
-        res.json({ error: false, data: note });
+        res.json({ error: false, note });
     } catch (e) {
         next(e);
     }
@@ -44,7 +44,7 @@ export const isExisted = async (req: Request, res: Response, next: NextFunction)
         const id: string = req.params.id;
         const note: boolean = await noteService.isExist(id);
 
-        res.json({ error: false, data: { isExisted: !!note } });
+        res.json({ error: false, isExist: !!note });
     } catch (e) {
         next(e);
     }

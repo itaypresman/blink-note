@@ -56,7 +56,7 @@ export default () => {
     return (
         <div className={'note-form'}>
             <div className={'form-group'}>
-                <TextArea value={note} onChange={onNoteChange}/>
+                <TextArea value={note} onChange={onNoteChange} placeholder={'Type your note...'}/>
             </div>
 
             <div className={'form-group --left'}>
